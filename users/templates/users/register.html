@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<body> 
+	<!--register-starts-->
+    <div class="container mt-4" style="background-color: rgb(255, 255, 252);">
+
+        <form  method="post">
+            {% csrf_token %}
+            {{form}}
+            <button type="submit" class="btn btn-success mt-4 mb-5">Register</button>
+        </form>
+        </div>
+    
+	<!--register-end-->
+
+
+</body>
+</html>
+
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'seller/seller_dashboard.html' %}
+
+{% block content %}
+<div>
+    <a href="{% url 'seller:add_book' %}">Add Book</a>
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Buttun</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+      <tr>
+        <th scope="row">{{book.id}}</th>
+        <td>{{book.name}}</td>
+        <td>{{book.price}}</td>
+        <td>{{book.quantity}}</td>
+        <td><a class="btn btn-outline-warning" href="">edit</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}

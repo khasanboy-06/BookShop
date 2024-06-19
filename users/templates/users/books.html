@@ -1,0 +1,29 @@
+{% extends 'users/admin_dashboard.html' %}
+
+{% block content %}
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Turi</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+      <tr>
+        <th scope="row">{{book.id}}</th>
+        <td>{{book.name}}</td>
+        <td>{{book.price}}</td>
+        <td>{{book.quantity}}</td>
+        <td>{{book.category}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock content %}

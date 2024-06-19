@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>BookStore</title>
+  
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.min.css" rel="stylesheet" />
+</head>
+
+<body style="background-color: rgb(243, 241, 238);">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#!">BookStore</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'users:home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for category in categories %}
+                                <li><a class="dropdown-item" href="{% url 'users:category' category.id %}">{{category.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% if user.user_role == 'seller' %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'seller:add_book' %}">Add book</a></li>
+                    {% endif %}
+                    {% if user.user_role == 'admin' %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'users:users' %}">Dashboard</a></li>
+                    {% endif %}
+                </ul>
+                {% if user.user_role == 'client' %}
+                <form class="d-flex">
+                    <a class="btn btn-outline-dark" href="{% url 'users:cart_detail' %}">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">{{cart}}</span>
+                    </a>
+                </form>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {% endif %}
+            </div>
+            {% if not user.is_authenticated %}
+
+            <div class=""><a href="{% url 'users:login' %}">Login</a></div>&nbsp;<a href="">/</a>
+            <div class=""><a href="{% url 'users:register' %}">Register</i></a></div>
+            {% endif %}
+            
+            {% if user.is_authenticated %}
+            <div class=""><a href="{% url 'users:profile' %}">Profile</a></div>&nbsp;<a href="">/</a>
+            <div class=""><a href="{% url 'users:logout' %}">Logout</a></div>
+            {% endif %}
+        </div>
+        
+    </nav>
+    <header class="py-5" style="background-color: rgb(245, 195, 139);">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">BookStore</h1>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}
+
+    {% endblock content %}
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.3.1/mdb.umd.min.js"></script>
+        <footer class="text-center " style="background-color: rgb(245, 195, 139);">
+            <!-- Grid container -->
+            <div class="container pt-4">
+              <!-- Section: Social media -->
+              <section class="mb-4" >
+                <!-- Facebook -->
+                <a
+                  data-mdb-ripple-init
+                  class="btn btn-link btn-floating btn-lg text-body m-1"
+                  href="#!"
+                  role="button"
+                  data-mdb-ripple-color="dark"
+                  ><i class="fab fa-facebook-f"></i
+                ></a>
+          
+                <!-- Twitter -->
+                <a
+                  data-mdb-ripple-init
+                  class="btn btn-link btn-floating btn-lg text-body m-1"
+                  href="#!"
+                  role="button"
+                  data-mdb-ripple-color="dark"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+          
+                <!-- Google -->
+                <a
+                  data-mdb-ripple-init
+                  class="btn btn-link btn-floating btn-lg text-body m-1"
+                  href="#!"
+                  role="button"
+                  data-mdb-ripple-color="dark"
+                  ><i class="fab fa-google"></i
+                ></a>
+          
+                <!-- Instagram -->
+                <a
+                  data-mdb-ripple-init
+                  class="btn btn-link btn-floating btn-lg text-body m-1"
+                  href="#!"
+                  role="button"
+                  data-mdb-ripple-color="dark"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+          
+                <!-- Linkedin -->
+                <a
+                  data-mdb-ripple-init
+                  class="btn btn-link btn-floating btn-lg text-body m-1"
+                  href="https://telegram.me/khasanboy_nasirdinov"
+                  role="button"
+                  data-mdb-ripple-color="dark"
+                  ><i class="fa-brands fa-telegram"></i></a>
+                <!-- Github -->
+                <a
+                  data-mdb-ripple-init
+                  class="btn btn-link btn-floating btn-lg text-body m-1"
+                  href="https://github.com/khasanboy-06"
+                  role="button"
+                  data-mdb-ripple-color="dark"
+                  ><i class="fab fa-github"></i
+                ></a>
+              </section>
+              <!-- Section: Social media -->
+            </div>
+            <!-- Grid container -->
+          
+            <!-- Copyright -->
+            <div class="text-center p-3" style="background-color: rgba(100, 62, 62, 0.05);">
+              © 2024 BookStore
+            </div>
+            <!-- Copyright -->
+          </footer>
+</body>
+</html>
